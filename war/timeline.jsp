@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
+<%@page import="de.kopis.twittercleaner.HtmlStatusWriter"%>
+<%@page import="de.kopis.twittercleaner.StatusWriter"%>
+<%@page import="java.text.DateFormat"%>
 <%@page import="twitter4j.Status"%>
 <%@page import="twitter4j.ResponseList"%>
 <%@page import="twitter4j.Twitter"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<% //TODO add taglib for jsf html/core %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://java.sun.com/jsf/core"
@@ -20,13 +24,14 @@
 	out.append("<ul>");
 	for (final Status status : timeline) {
 		out.append("<li>")
-		.append(status.getUser().getName()).append(" ").append(status.getText())
+		.append(new HtmlStatusWriter(status).withSource().toString())
 		.append("</li>");
 	}
 	out.append("</ul>");
 %>
 <a href="/delete">wipe this bunch</a>
-<a href="/delete?all=true">wipe all! (and yes, I know what I'm doing)</a>
+<a href="/delete?all=true">wipe all! (and yes, I know what I'm
+doing)</a>
 <a href="/logout">log out</a>
 
 </body>
