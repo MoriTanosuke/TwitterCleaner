@@ -24,7 +24,7 @@ public class DeleteTweetServlet extends HttpServlet {
 //			while (timeline != null && timeline.size() > 0) {
 				for (final Status status : timeline) {
 					final long id = status.getId();
-//					twitter.destroyStatus(id);
+					twitter.destroyStatus(id);
 					log.finest("Destroying status: " + id);
 				}
 //			}
