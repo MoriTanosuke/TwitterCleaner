@@ -25,7 +25,8 @@
 	}
 	out.append("</ul>");
 %>
-<a href="/delete">wipe them!</a>
+<a href="/delete">wipe this bunch</a>
+<a href="/delete?all=true">wipe all! (and yes, I know what I'm doing)</a>
 <a href="/logout">log out</a>
 
 </body>

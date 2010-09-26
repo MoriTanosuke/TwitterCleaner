@@ -18,16 +18,18 @@ public class DeleteTweetServlet extends HttpServlet {
 
 	public void doGet(final HttpServletRequest req, final HttpServletResponse resp) throws IOException {
 		final Twitter twitter = (Twitter) req.getSession().getAttribute("twitter");
+		final boolean all = Boolean.valueOf(req.getParameter("all"));
+		log.finest("Wiping all: " + all);
 		try {
 			final ResponseList<Status> timeline = twitter.getUserTimeline();
 			// loop over timeline until no more tweets are available
-//			while (timeline != null && timeline.size() > 0) {
+			do {
 				for (final Status status : timeline) {
 					final long id = status.getId();
 					twitter.destroyStatus(id);
 					log.finest("Destroying status: " + id);
 				}
-//			}
+			} while (all && timeline != null && timeline.size() > 0);
 		} catch (final TwitterException e) {
 			resp.getWriter()
 				.append("Error while destroying statuses: ")
