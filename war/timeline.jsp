@@ -24,8 +24,9 @@
 		.append("</li>");
 	}
 	out.append("</ul>");
-	out.append("<a href=\"/delete\">wipe them!</a>");
 %>
+<a href="/delete">wipe them!</a>
+<a href="/logout">log out</a>
 
 </body>
 </html>
