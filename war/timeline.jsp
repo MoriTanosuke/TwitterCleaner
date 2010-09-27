@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
 <%@page import="de.kopis.twittercleaner.HtmlStatusWriter"%>
-<%@page import="de.kopis.twittercleaner.StatusWriter"%>
 <%@page import="java.text.DateFormat"%>
 <%@page import="twitter4j.Status"%>
 <%@page import="twitter4j.ResponseList"%>
@@ -29,10 +28,12 @@
 	}
 	out.append("</ul>");
 %>
-<a href="/delete">wipe this bunch</a>
-<a href="/delete?all=true">wipe all! (and yes, I know what I'm
-doing)</a>
-<a href="/logout">log out</a>
+
+<ul>
+<li><a href="/delete">wipe this bunch</a></li>
+<li><a href="/delete?all=true">wipe all! (and yes, I know what I'm doing)</a></li>
+<li><a href="/logout">log out</a></li>
+</ul>
 
 </body>
 </html>

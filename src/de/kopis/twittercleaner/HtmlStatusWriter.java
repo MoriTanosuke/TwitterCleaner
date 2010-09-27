@@ -57,7 +57,9 @@ public class HtmlStatusWriter {
 	}
 
 	private StringBuilder appendDate(final StringBuilder build) {
-		build.append("<a href=\"http://twitter.com/statuses/").append(Long.toString(status.getId())).append("\">")
+		build.append("<a href=\"http://twitter.com/")
+			.append(status.getUser().getScreenName())
+			.append("/status/").append(Long.toString(status.getId())).append("\">")
 			.append(" at ").append(DateFormat.getInstance().format(status.getCreatedAt()))
 			.append("</a>");
 		return build;
