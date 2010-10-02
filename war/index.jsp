@@ -9,13 +9,14 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 <link rel="stylesheet" type="text/css" href="/styles.css" />
 <title>TwitterCleaner</title>
+<jsp:include page="analytics.jsp" />
 </head>
 <body>
 <h1>TwitterCleaner</h1>
 <h2>I want to delete my tweets!</h2>
 <p><a href="./signin">Sign in and start.</a></p>
-<p>You will be taken to <a href="https://">Twitter</a> to authorize
-this application.</p>
+<p>You will be taken to <a href="https://twitter.com/">Twitter</a>
+to authorize this application.</p>
 
 <h2>FAQ</h2>
 <ul>
@@ -31,6 +32,20 @@ this application.</p>
 	all"</em> will be the next thing I add to this application.</span></li>
 	<li><strong>Who is responsible for this thing?</strong> <span><a
 		href="http://www.kopis.de">I am. Come over and get in contact.</a></span></li>
+</ul>
+
+<h2>What's next?</h2>
+<ul>
+	<li>Moving the delete functionality into a <a
+		href="http://code.google.com/intl/de-DE/appengine/docs/java/taskqueue/overview.html#Using_Task_Queues_in_Java">Task
+	Queue</a></li>
+	<li>Maybe add an email input field to support <em>run in
+	background</em>?</li>
+	<li>Add input field for user to specify API calls per minute (or
+	something like that)</li>
+	<li>Respect the <a
+		href="http://dev.twitter.com/pages/rate-limiting">Twitter API
+	limits</a></li>
 </ul>
 
 <address>&copy; 2010 <a href="http://www.kopis.de/">Carsten
