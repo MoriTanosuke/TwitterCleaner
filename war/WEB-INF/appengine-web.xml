@@ -4,7 +4,7 @@
 	<version>3</version>
 	<sessions-enabled>true</sessions-enabled>
 	<system-properties>
-		<property name="twitter4j.oauth.consumerKey" value="KEY" />
-		<property name="twitter4j.oauth.consumerSecret" value="SECRET" />
+		<property name="twitter4j.oauth.consumerKey" value="4EE4pcroozrluPcUUQUmg" />
+		<property name="twitter4j.oauth.consumerSecret" value="9bb0N1l82sQScptgmeMTGSqiVuYbRPPqhsRcQlRo" />
 	</system-properties>
 </appengine-web-app>

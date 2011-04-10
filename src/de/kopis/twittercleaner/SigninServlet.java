@@ -37,29 +37,30 @@ import javax.servlet.http.HttpServletResponse;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
 import twitter4j.TwitterFactory;
-import twitter4j.http.RequestToken;
+import twitter4j.auth.RequestToken;
 
 public class SigninServlet extends HttpServlet {
-	private static final long serialVersionUID = -6205814293093350242L;
-	private static final Logger log = Logger.getLogger(SigninServlet.class.getName());
+    private static final long serialVersionUID = -6205814293093350242L;
+    private static final Logger log = Logger.getLogger(SigninServlet.class.getName());
 
-	protected void doGet(final HttpServletRequest request, final HttpServletResponse response) throws ServletException,
-			IOException {
-		final Twitter twitter = new TwitterFactory().getInstance();
-		request.getSession().setAttribute("twitter", twitter);
-		try {
-			final StringBuffer callbackURL = request.getRequestURL();
-			final int index = callbackURL.lastIndexOf("/");
-			callbackURL.replace(index, callbackURL.length(), "").append("/callback");
+    @Override
+    protected void doGet(final HttpServletRequest request, final HttpServletResponse response) throws ServletException,
+            IOException {
+        final Twitter twitter = new TwitterFactory().getInstance();
+        request.getSession().setAttribute("twitter", twitter);
+        try {
+            final StringBuffer callbackURL = request.getRequestURL();
+            final int index = callbackURL.lastIndexOf("/");
+            callbackURL.replace(index, callbackURL.length(), "").append("/callback");
 
-			log.finest("Requesting authorization...");
-			final RequestToken requestToken = twitter.getOAuthRequestToken(callbackURL.toString());
-			request.getSession().setAttribute("requestToken", requestToken);
-			log.finest("Redirecting to twitter...");
-			response.sendRedirect(requestToken.getAuthenticationURL());
-		} catch (final TwitterException e) {
-			log.throwing(this.getClass().getName(), "doGet", e);
-			throw new ServletException(e);
-		}
-	}
+            log.finest("Requesting authorization...");
+            final RequestToken requestToken = twitter.getOAuthRequestToken(callbackURL.toString());
+            request.getSession().setAttribute("requestToken", requestToken);
+            log.finest("Redirecting to twitter...");
+            response.sendRedirect(requestToken.getAuthenticationURL());
+        } catch (final TwitterException e) {
+            log.throwing(this.getClass().getName(), "doGet", e);
+            throw new ServletException(e);
+        }
+    }
 }

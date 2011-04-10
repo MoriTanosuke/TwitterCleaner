@@ -36,24 +36,26 @@ import javax.servlet.http.HttpServletResponse;
 
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
-import twitter4j.http.RequestToken;
+import twitter4j.auth.RequestToken;
 
 public class CallbackServlet extends HttpServlet {
-	private static final long serialVersionUID = 1657390011452788111L;
-	private static final Logger log = Logger.getLogger(CallbackServlet.class.getName());
+    private static final long serialVersionUID = 1657390011452788111L;
+    private static final Logger log = Logger.getLogger(CallbackServlet.class.getName());
 
-	protected void doGet(final HttpServletRequest request, final HttpServletResponse response) throws ServletException, IOException {
-		final Twitter twitter = (Twitter) request.getSession().getAttribute("twitter");
-		final RequestToken requestToken = (RequestToken) request.getSession().getAttribute("requestToken");
-		final String verifier = request.getParameter("oauth_verifier");
-		try {
-			log.finest("Authorization received.");
-			twitter.getOAuthAccessToken(requestToken, verifier);
-			request.getSession().removeAttribute("requestToken");
-		} catch (final TwitterException e) {
-			throw new ServletException(e);
-		}
-		log.finest("Redirecting to homepage...");
-		response.sendRedirect(request.getContextPath() + "/");
-	}
+    @Override
+    protected void doGet(final HttpServletRequest request, final HttpServletResponse response) throws ServletException,
+            IOException {
+        final Twitter twitter = (Twitter) request.getSession().getAttribute("twitter");
+        final RequestToken requestToken = (RequestToken) request.getSession().getAttribute("requestToken");
+        final String verifier = request.getParameter("oauth_verifier");
+        try {
+            log.finest("Authorization received.");
+            twitter.getOAuthAccessToken(requestToken, verifier);
+            request.getSession().removeAttribute("requestToken");
+        } catch (final TwitterException e) {
+            throw new ServletException(e);
+        }
+        log.finest("Redirecting to homepage...");
+        response.sendRedirect(request.getContextPath() + "/");
+    }
 }
