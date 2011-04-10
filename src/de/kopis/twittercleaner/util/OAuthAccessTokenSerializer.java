@@ -1,37 +1,33 @@
 package de.kopis.twittercleaner.util;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.Reader;
+import java.io.StringReader;
 
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
 import twitter4j.auth.AccessToken;
 
 public class OAuthAccessTokenSerializer {
+    private static final String SEPARATOR = "|";
+
     public static String serializeOAuthAccessToken(Twitter twitter) throws TwitterException, IOException {
-        AccessToken token = twitter.getOAuthAccessToken();
-        ByteArrayOutputStream out = new ByteArrayOutputStream();
-
-        ObjectOutputStream oout = new ObjectOutputStream(out);
-        oout.writeBytes(token.getToken());
-        oout.writeBytes(token.getTokenSecret());
-        oout.close();
-
-        return new String(out.toByteArray());
+        return serializeOAuthAccessToken(twitter.getOAuthAccessToken());
     }
 
-    public static AccessToken deserializeOAuthAccessToken(byte[] buf) throws TwitterException, IOException {
-        String token = "";
-        String tokenSecret = "";
+    public static String serializeOAuthAccessToken(AccessToken token) throws TwitterException, IOException {
+        return token.getToken() + SEPARATOR + token.getTokenSecret();
+    }
 
-        ObjectInputStream oin = new ObjectInputStream(new ByteArrayInputStream(buf));
-        token = oin.readUTF();
-        tokenSecret = oin.readUTF();
-        oin.close();
-
-        return new AccessToken(token, tokenSecret);
+    public static AccessToken deserializeOAuthAccessToken(byte[] serialized) throws TwitterException, IOException {
+        Reader r = new StringReader(new String(serialized));
+        int c = -1;
+        StringBuilder buf = new StringBuilder();
+        while ((c = r.read()) != -1) {
+            buf.append((char) c);
+        }
+        String[] data = buf.toString().split("\\" + SEPARATOR);
+        AccessToken token = new AccessToken(data[0], data[1]);
+        return token;
     }
 }

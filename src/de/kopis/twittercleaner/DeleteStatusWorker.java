@@ -16,12 +16,23 @@ public class DeleteStatusWorker extends HttpServlet {
     private static final Logger log = Logger.getLogger(DeleteStatusWorker.class.getName());
 
     @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        // TODO Auto-generated method stub
+        doProcess(req, resp);
+    }
+
+    @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        doProcess(req, resp);
+    }
+
+    private void doProcess(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         log.info("Deleting a status now.");
         try {
             String id = req.getParameter("id");
-            AccessToken accessToken = OAuthAccessTokenSerializer.deserializeOAuthAccessToken(req.getParameter(
-                    "oauthtoken").getBytes());
+            String token = req.getParameter("oauthtoken");
+            log.finest("Using " + id + " and oauth " + token);
+            AccessToken accessToken = OAuthAccessTokenSerializer.deserializeOAuthAccessToken(token.getBytes());
             log.finest("Trying to destroy status '" + id + "' with access token for username '"
                     + accessToken.getScreenName() + "'");
         } catch (TwitterException e) {
