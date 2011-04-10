@@ -1,0 +1,5 @@
+#Tue Oct 12 18:49:02 CEST 2010
+com.vaadin.integration.eclipse.widgetsetParallelism=1
+com.vaadin.integration.eclipse.widgetsetStyle=PRETTY
+com.vaadin.integration.eclipse.widgetsetVerbose=true
+eclipse.preferences.version=1
