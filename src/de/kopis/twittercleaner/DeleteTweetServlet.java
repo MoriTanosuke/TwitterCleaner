@@ -12,32 +12,35 @@ import twitter4j.Status;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
 
+import com.google.appengine.api.labs.taskqueue.Queue;
+import com.google.appengine.api.labs.taskqueue.QueueFactory;
+import com.google.appengine.api.labs.taskqueue.TaskOptions;
+
+import de.kopis.twittercleaner.util.OAuthAccessTokenSerializer;
+
 public class DeleteTweetServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final Logger log = Logger.getLogger(DeleteTweetServlet.class.getName());
 
 	public void doGet(final HttpServletRequest req, final HttpServletResponse resp) throws IOException {
 		final Twitter twitter = (Twitter) req.getSession().getAttribute("twitter");
-		final boolean all = Boolean.valueOf(req.getParameter("all"));
-		log.finest("Wiping all: " + all);
 		try {
-			//TODO use a Task Queue for deletion
-			//TODO respect API limit!
-			//TODO add user input for API calls per minute or such
-			// loop over timeline until no more tweets are available
+			// TODO use a Task Queue for deletion
+			Queue queue = QueueFactory.getDefaultQueue();
 			ResponseList<Status> timeline;
-			do {
-				log.finest("Deleting next bunch of statuses.");
-				timeline = twitter.getUserTimeline();
-				for (final Status status : timeline) {
-					final long id = status.getId();
-					twitter.destroyStatus(id);
-					log.finest("Destroying status: " + id);
-				}
-			} while (all && timeline != null && timeline.size() > 0);
+			log.finest("Adding next bunch of statuses to delete queue.");
+			timeline = twitter.getUserTimeline();
+			for (final Status status : timeline) {
+				queue.add(TaskOptions.Builder.url("/deletestatusworker")
+						.param("id", Long.toString(status.getId()))
+						.param("oauthtoken", OAuthAccessTokenSerializer.serializeOAuthAccessToken(twitter)));
+			}
+			log.finest("Added " + timeline.size() + " statuses to delete queue.");
+			// TODO respect API limit!
+			// TODO add user input for API calls per minute or such
 		} catch (final TwitterException e) {
 			log.throwing(getClass().getName(), "doGet", e);
-			resp.getWriter().append("Error while destroying statuses: ").append(e.getMessage());
+			resp.getWriter().append("Error while adding statuses to delete queue: ").append(e.getMessage());
 		}
 		resp.sendRedirect("/timeline.jsp");
 	}
