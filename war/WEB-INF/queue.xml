@@ -1,0 +1,11 @@
+<queue-entries>
+  <total-storage-limit>
+    50M
+  </total-storage-limit>
+  <queue>
+    <name>delete-queue</name>
+    <rate>20/s</rate>
+    <bucket-size>40</bucket-size>
+    <max-concurrent-requests>1</max-concurrent-requests>
+  </queue>
+</queue-entries>

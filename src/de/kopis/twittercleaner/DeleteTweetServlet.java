@@ -13,10 +13,9 @@ import twitter4j.Status;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
 
-import com.google.appengine.api.labs.taskqueue.Queue;
-import com.google.appengine.api.labs.taskqueue.QueueFactory;
-import com.google.appengine.api.labs.taskqueue.TaskOptions;
-import com.google.appengine.api.labs.taskqueue.TaskOptions.Method;
+import com.google.appengine.api.taskqueue.Queue;
+import com.google.appengine.api.taskqueue.QueueFactory;
+import com.google.appengine.api.taskqueue.TaskOptions;
 
 import de.kopis.twittercleaner.util.OAuthAccessTokenSerializer;
 
@@ -29,7 +28,7 @@ public class DeleteTweetServlet extends HttpServlet {
         final Twitter twitter = (Twitter) req.getSession().getAttribute("twitter");
         try {
             // TODO use a Task Queue for deletion
-            Queue queue = QueueFactory.getDefaultQueue();
+            Queue queue = QueueFactory.getQueue("delete-queue");
             ResponseList<Status> timeline;
             log.finest("Adding next bunch of statuses to delete queue.");
             timeline = twitter.getUserTimeline();
@@ -38,9 +37,8 @@ public class DeleteTweetServlet extends HttpServlet {
             while (it.hasNext()) {
                 Status s = it.next();
                 log.finest("Creating task to delete status " + s.getId());
-                queue.add(TaskOptions.Builder.url("/deletestatusworker").param("id", Long.toString(s.getId()))
-                        .param("oauthtoken", OAuthAccessTokenSerializer.serializeOAuthAccessToken(twitter))
-                        .method(Method.GET));
+                queue.add(TaskOptions.Builder.withUrl("/deletestatusworker").param("id", Long.toString(s.getId()))
+                        .param("oauthtoken", OAuthAccessTokenSerializer.serializeOAuthAccessToken(twitter)));
             }
             log.finest("Added " + timeline.size() + " statuses to delete queue.");
             // TODO respect API limit!
