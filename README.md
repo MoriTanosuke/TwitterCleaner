@@ -11,6 +11,13 @@ my twitter account for the public, or keep it private.
 
 This application is running at
 
-    http://twittercleaner.appspot.com
+* http://twittercleaner.appspot.com
 
 in a more or less functional version. Give it a try if you want to bulk delete your tweets.
+
+Continuous Integration
+================
+
+I'm setting up a continuous integration server at
+
+* https://cringe.ci.cloudbees.com/job/TwitterCleaner/
