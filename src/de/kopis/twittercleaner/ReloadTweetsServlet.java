@@ -26,7 +26,8 @@ public class ReloadTweetsServlet extends HttpServlet {
         List<Status> statuses = new ArrayList<Status>();
         try {
             RateLimitStatus rateLimitStatus = twitter.getRateLimitStatus();
-            req.getSession().setAttribute("rateLimitStatus", rateLimitStatus);
+            req.getSession().setAttribute("rateLimitStatus",
+                    rateLimitStatus.getRemainingHits() + ", next reset " + rateLimitStatus.getResetTime());
 
             ListIterator<Status> userTimeline = twitter.getUserTimeline().listIterator();
             while (userTimeline.hasNext()) {
