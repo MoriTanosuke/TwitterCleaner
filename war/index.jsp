@@ -13,10 +13,12 @@
 </head>
 <body>
 <h1>TwitterCleaner</h1>
-<p><font color="red">I'm working on this application at the moment to provide a useful 
-bulk delete feature. Unfortunatly it's not as easy as I thought and I have to use 
-<a href="https://code.google.com/intl/de/appengine/docs/java/taskqueue/overview.html">Googles Task Queue</a>
-for this now. Have to reimplement the communication with Twitter now...</font></p>
+<p><font color="green">This application uses <a
+	href="https://code.google.com/intl/de/appengine/docs/java/taskqueue/overview.html">Googles
+Task Queue</a> now. There is a limit of <em>20 deletes per second</em>. If
+you got any issues, please leave a comment at <a
+	href="https://github.com/MoriTanosuke/TwitterCleaner/issues">my bug
+tracker</a>.</font></p>
 <h2>I want to delete my tweets!</h2>
 <p><a href="./signin">Sign in and start.</a></p>
 <p>You will be taken to <a href="https://twitter.com/">Twitter</a>
@@ -40,11 +42,8 @@ to authorize this application.</p>
 
 <h2>What's next?</h2>
 <ul>
-	<li>Moving the delete functionality into a <a
-		href="http://code.google.com/intl/de-DE/appengine/docs/java/taskqueue/overview.html#Using_Task_Queues_in_Java">Task
-	Queue</a></li>
 	<li>Maybe add an email input field to support <em>run in
-	background</em>?</li>
+	background</em> with notifications?</li>
 	<li>Add input field for user to specify API calls per minute (or
 	something like that)</li>
 	<li>Respect the <a
