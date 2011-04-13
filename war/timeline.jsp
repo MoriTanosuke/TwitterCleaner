@@ -28,7 +28,7 @@ if(request.getSession().getAttribute("statuses") != null) {
     out.append("<ul>");
     for (final Status status : timeline) {
         out.append("<li>").append(new HtmlStatusWriter(status).withSource().toString())
-                .append("<a href=\"/delete?id=" + status.getId() + "\">delete</a>").append("</li>");
+                .append(" <a href=\"/delete?id=" + status.getId() + "\">delete</a>").append("</li>");
     }
     out.append("</ul>");
 }
@@ -39,7 +39,9 @@ if(request.getSession().getAttribute("statuses") != null) {
 <ul>
 	<li><a href="/reload">reload from twitter</a></li>
 	<li><a href="/delete">wipe this bunch</a></li>
+<%--
 	<li><a href="/delete?all=true">wipe all! (and yes, I know what I'm doing)</a></li>
+ --%>
 	<li><a href="/logout">log out</a></li>
 </ul>
 
