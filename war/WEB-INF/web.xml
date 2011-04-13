@@ -45,6 +45,14 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 		<url-pattern>/deletestatusworker</url-pattern>
 	</servlet-mapping>
 	<servlet>
+		<servlet-name>reload</servlet-name>
+		<servlet-class>de.kopis.twittercleaner.ReloadTweetsServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>reload</servlet-name>
+		<url-pattern>/reload</url-pattern>
+	</servlet-mapping>
+	<servlet>
 		<servlet-name>logout</servlet-name>
 		<servlet-class>de.kopis.twittercleaner.LogoutServlet</servlet-class>
 	</servlet>

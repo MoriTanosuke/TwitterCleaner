@@ -13,6 +13,10 @@
 </head>
 <body>
 <h1>TwitterCleaner</h1>
+<p><font color="red">I'm working on this application at the moment to provide a useful 
+bulk delete feature. Unfortunatly it's not as easy as I thought and I have to use 
+<a href="https://code.google.com/intl/de/appengine/docs/java/taskqueue/overview.html">Googles Task Queue</a>
+for this now. Have to reimplement the communication with Twitter now...</font></p>
 <h2>I want to delete my tweets!</h2>
 <p><a href="./signin">Sign in and start.</a></p>
 <p>You will be taken to <a href="https://twitter.com/">Twitter</a>
