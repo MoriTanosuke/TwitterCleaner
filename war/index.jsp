@@ -25,6 +25,7 @@ to authorize this application.</p>
 	from your timeline</a>. It uses <a
 		href="http://dev.twitter.com/pages/oauth_faq">OAuth</a> to log in to
 	twitter and stores <strong>NOTHING</strong>.</span></li>
+	<li><strong>Do you store my twitter data?</strong> <span>I'm not storing <strong>anything</strong>. If you use this application and you log out after finishing your deletes, I completely forget that you ever used my application. That's why you have to log in every time you use it...</span></li>
 	<li><strong>Why does this look so ugly?</strong> <span>I'm
 	a developer first. And I don't really care about glossy buttons.</span></li>
 	<li><strong>I want to delete <em>all</em> my tweets and I
