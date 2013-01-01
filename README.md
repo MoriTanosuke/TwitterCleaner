@@ -9,6 +9,9 @@ and have a useful application that I'll use myself. And one usecase is still uns
 Every now and then I stumble upon this question. Mainly when I'm unsure if I should open 
 my twitter account for the public, or keep it private.
 
+If you really want to automate the delete for all your tweets, you should install the 
+**greasemonkey script** from http://wiki.kopis.de/doku.php/code:automatically_start_next_delete_on_twittercleaner
+
 This application is running at
 
 * http://twittercleaner.appspot.com
