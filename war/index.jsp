@@ -29,7 +29,10 @@ to authorize this application.</p>
 	<li><strong>How can I automate this to <em>really</em> delete everything?</strong><span>Install 
 	the <a href="https://userscripts.org/">greasemonkey script</a> from 
 	<a href="http://wiki.kopis.de/doku.php/code:automatically_start_next_delete_on_twittercleaner">http://wiki.kopis.de/doku.php/code:automatically_start_next_delete_on_twittercleaner</a>
-	in your <a href="https://www.google.com/intl/de/chrome/browser/">Google Chrome</a>.</li>
+	in your <a href="https://www.google.com/intl/de/chrome/browser/">Google Chrome</a>. Please, be careful:
+	If you're deleting thousands of tweets and don't set a large enough pause interval (like 30 seconds)
+	in the greasemonkey script, you can bring my application over quota. It will stop working until
+	the next day then.</li>
 	<li><strong>What is this?</strong> <span> This application
 	lets you wipe the last bunch of <a href="https://twitter.com">tweets
 	from your timeline</a>. It uses <a
